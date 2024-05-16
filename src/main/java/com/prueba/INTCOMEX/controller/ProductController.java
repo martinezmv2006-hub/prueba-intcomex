@@ -38,7 +38,7 @@ public class ProductController {
 
             return ResponseEntity.status(200).body(idProduct.toString());
         } catch (Exception e) {
-            log.info("Error while trying to Get Number Card, with message: "+ e.getMessage());
+            log.info("Error while trying to productsDTO, with message: "+ e.getMessage());
 
             return ResponseEntity.status(500).body("Could not get all Employee");
         }

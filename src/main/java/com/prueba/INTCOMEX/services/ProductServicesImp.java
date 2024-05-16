@@ -21,17 +21,42 @@ import java.util.Optional;
 public class ProductServicesImp implements ProductServices{
 
     private final ProductRepository productRepository;
+    private final CategoryService categoryService;
 
     @Autowired
     private final ProductsMapper mapper;
 
-    public ProductServicesImp(ProductRepository productRepository, ProductsMapper mapper) {
+    private final CategoriesMapper categoriesMapper;
+
+    public ProductServicesImp(ProductRepository productRepository, ProductsMapper mapper, CategoryService categoryService, CategoriesMapper categoriesMapper) {
         this.productRepository = productRepository;
         this.mapper = mapper;
+        this.categoryService = categoryService;
+        this.categoriesMapper = categoriesMapper;
     }
 
     @Override
     public Long createProduct(ProductsDTO productsDTO) {
+
+        long idCategory = productsDTO.getCategories().getCategoryID() == null ?
+                0: productsDTO.getCategories().getCategoryID();
+        String nameCategory = productsDTO.getCategories().getCategoryName();
+
+        Categories category;
+
+        if(idCategory>0){
+            category = categoryService.getCategoriesById(idCategory);
+        } else if (!nameCategory.isBlank()) {
+            category = categoryService.getCategoriesByName(nameCategory);
+        }else{
+            log.info("A category was not specified.");
+            return null;
+        }
+
+        productsDTO.setCategories(categoriesMapper.toDto(category));
+
+        log.info(productsDTO.toString());
+
         Products products = mapper.toEntity(productsDTO);
         productRepository.save(products);
         log.info("Save products"+productsDTO);

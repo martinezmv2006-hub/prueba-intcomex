@@ -8,7 +8,7 @@ import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
 @Log
 @Service
@@ -34,7 +34,20 @@ public class CategoryServiceImp implements CategoryService{
     }
 
     @Override
-    public List<Categories> getAllCategories() {
-        return List.of();
+    public Categories getCategoriesById(Long id) {
+        Optional<Categories> categoriesOpt = categoryRepository.findCategoriesByCategoryID(id);
+        if(!categoriesOpt.isEmpty()) {
+            return categoriesOpt.get();
+        }
+        return null;
+    }
+
+    @Override
+    public Categories getCategoriesByName(String name) {
+        Optional<Categories> categoriesOpt = categoryRepository.findCategoriesByCategoryName(name);
+        if(!categoriesOpt.isEmpty()) {
+            return categoriesOpt.get();
+        }
+        return null;
     }
 }
