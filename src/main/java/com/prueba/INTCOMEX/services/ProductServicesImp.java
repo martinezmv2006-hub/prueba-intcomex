@@ -5,7 +5,6 @@ import com.prueba.INTCOMEX.mappers.ProductsMapper;
 import com.prueba.INTCOMEX.model.Categories;
 import com.prueba.INTCOMEX.model.DTO.ProductsDTO;
 import com.prueba.INTCOMEX.model.Products;
-import com.prueba.INTCOMEX.repositories.CategoryRepository;
 import com.prueba.INTCOMEX.repositories.ProductRepository;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;

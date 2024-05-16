@@ -2,16 +2,13 @@ package com.prueba.INTCOMEX.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.prueba.INTCOMEX.model.DTO.CategoriesDTO;
 import com.prueba.INTCOMEX.model.DTO.ProductsDTO;
 import com.prueba.INTCOMEX.model.Products;
-import com.prueba.INTCOMEX.services.CategoryService;
 import com.prueba.INTCOMEX.services.ProductServices;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

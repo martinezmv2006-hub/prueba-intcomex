@@ -8,9 +8,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @OpenAPIDefinition(
         info = @Info(
-                title = "companies CRUD",
+                title = "INTCOMEX CRUD",
                 version = "1.0.0",
-                description = "This is a CRUD for management companies"
+                description = "This is a CRUD for management INTCOMEX"
         )
 )
 public class OpenApiConfig implements WebMvcConfigurer {
