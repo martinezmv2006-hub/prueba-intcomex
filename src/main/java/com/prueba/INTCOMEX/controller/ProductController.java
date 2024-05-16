@@ -7,6 +7,8 @@ import com.prueba.INTCOMEX.model.DTO.ProductsDTO;
 import com.prueba.INTCOMEX.model.Products;
 import com.prueba.INTCOMEX.services.CategoryService;
 import com.prueba.INTCOMEX.services.ProductServices;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,11 +22,13 @@ import java.util.List;
 @RestController
 @RequestMapping("")
 @CrossOrigin(origins = "*")
+@Tag(name = "Product resources")
 public class ProductController {
 
     @Autowired
     private ProductServices service;
 
+    @Operation(summary = "post for product creation")
     @PostMapping(path = "product/create", consumes = "application/json; charset=utf-8")
     public ResponseEntity<String> createProduct(@RequestBody ProductsDTO productsDTO)  {
         try {
@@ -40,6 +44,7 @@ public class ProductController {
         }
     }
 
+    @Operation(summary = "get to bring all the products with their pagination")
     @GetMapping("product/findAll")
     public ResponseEntity<String> getProducts(@RequestParam(defaultValue = "0") int page,
                                       @RequestParam(defaultValue = "10") int size) {
@@ -54,6 +59,7 @@ public class ProductController {
         }
     }
 
+    @Operation(summary = "get to fetch all a product by id")
     @GetMapping("product/find")
     public ResponseEntity<String> getProductById(@RequestParam Integer idProducts) {
         Products products = service.getProduct(idProducts);
