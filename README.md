@@ -3,6 +3,7 @@
 - Maven 3
 - Lombok
 - OpenApi
+- IDE intellij community
 
 ### Despliegue en desarrollo
 - Se debe instalar una base de datos MySql en local o por defecto si se tiene docker se puede ejecutar el siguiente comando:
