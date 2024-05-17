@@ -37,6 +37,10 @@ public class ProductServicesImp implements ProductServices{
     @Override
     public Long createProduct(ProductsDTO productsDTO) {
 
+        if(productsDTO.getCategories()==null){
+            log.info("A category was not specified.");
+            return 0L;
+        }
         long idCategory = productsDTO.getCategories().getCategoryID() == null ?
                 0: productsDTO.getCategories().getCategoryID();
         String nameCategory = productsDTO.getCategories().getCategoryName();
@@ -49,7 +53,7 @@ public class ProductServicesImp implements ProductServices{
             category = categoryService.getCategoriesByName(nameCategory);
         }else{
             log.info("A category was not specified.");
-            return null;
+            return 0L;
         }
 
         productsDTO.setCategories(categoriesMapper.toDto(category));
@@ -71,9 +75,7 @@ public class ProductServicesImp implements ProductServices{
     @Override
     public Products getProduct(Integer idProducts) {
         Optional<Products> productsOpt = productRepository.findById(idProducts);
-        if(productsOpt.isEmpty()) {
-            return productsOpt.get();
-        }
+        if(productsOpt.isEmpty()) return productsOpt.get();
         return null;
     }
 }

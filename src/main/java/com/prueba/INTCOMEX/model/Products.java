@@ -1,9 +1,14 @@
 package com.prueba.INTCOMEX.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
-
+@SuperBuilder
+@NoArgsConstructor
 @Data
 @Entity
 @Table(name = "Products")

@@ -32,8 +32,11 @@ public class ProductController {
             log.info("Get Number Card"+productsDTO);
 
             Long idProduct = service.createProduct(productsDTO);
-
-            return ResponseEntity.status(200).body(idProduct.toString());
+            if(idProduct==0){
+                return ResponseEntity.status(400).body("Error, Save Product: ");
+            }else {
+                return ResponseEntity.status(200).body("Save, idProduct: "+idProduct.toString());
+            }
         } catch (Exception e) {
             log.info("Error while trying to productsDTO, with message: "+ e.getMessage());
 
