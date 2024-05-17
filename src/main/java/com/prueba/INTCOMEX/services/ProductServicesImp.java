@@ -78,4 +78,24 @@ public class ProductServicesImp implements ProductServices{
         if(productsOpt.isEmpty()) return productsOpt.get();
         return null;
     }
+
+    public Long createMassiveProduct(Integer count) {
+        Long log = 0L;
+        Boolean inter = true;
+        for(int x=1; x<count+1; x++){
+            Products products =
+                    Products.builder()
+                        .productName("Massive product "+x)
+                        .categories(
+                                Categories.builder()
+                                        .categoryID(inter ? 1L:2L)
+                                        .build()
+                        )
+                        .build();
+            productRepository.save(products);
+            log++;
+            inter = !inter;
+        }
+        return log;
+    }
 }

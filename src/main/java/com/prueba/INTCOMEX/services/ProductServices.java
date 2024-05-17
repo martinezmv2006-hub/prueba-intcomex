@@ -13,4 +13,6 @@ public interface ProductServices {
     List<Products> getProducts(Pageable pageable);
 
     Products getProduct(Integer id);
+
+    Long createMassiveProduct(Integer count);
 }

@@ -29,8 +29,6 @@ public class ProductController {
     @PostMapping(path = "product/create", consumes = "application/json; charset=utf-8")
     public ResponseEntity<String> createProduct(@RequestBody ProductsDTO productsDTO)  {
         try {
-            log.info("Get Number Card"+productsDTO);
-
             Long idProduct = service.createProduct(productsDTO);
             if(idProduct==0){
                 return ResponseEntity.status(400).body("Error, Save Product: ");
@@ -38,9 +36,7 @@ public class ProductController {
                 return ResponseEntity.status(200).body("Save, idProduct: "+idProduct.toString());
             }
         } catch (Exception e) {
-            log.info("Error while trying to productsDTO, with message: "+ e.getMessage());
-
-            return ResponseEntity.status(500).body("Could not get all Employee");
+            return ResponseEntity.status(500).body("Error createProduct"+e.getMessage());
         }
     }
 
@@ -55,7 +51,7 @@ public class ProductController {
             return ResponseEntity.status(200).body(objectMapper.writeValueAsString(listProducts));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            return ResponseEntity.status(500).body("Error al convertir la lista de productos a JSON");
+            return ResponseEntity.status(500).body("Error getProducts"+e.getMessage());
         }
     }
 
@@ -68,7 +64,18 @@ public class ProductController {
             return ResponseEntity.status(200).body(objectMapper.writeValueAsString(products));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            return ResponseEntity.status(500).body("Error al convertir la lista de productos a JSON");
+            return ResponseEntity.status(500).body("Error getProductById: "+e.getMessage());
+        }
+    }
+
+    @Operation(summary = "post for create massive product")
+    @PostMapping(path = "product/createmassive", consumes = "application/json; charset=utf-8")
+    public ResponseEntity<String> createMassiveProduct(@RequestParam Integer count)  {
+        try {
+            Long idProduct = service.createMassiveProduct(count);
+            return ResponseEntity.status(200).body("Save, idProduct: "+idProduct);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error createMassiveProduct: "+e.getMessage());
         }
     }
 
